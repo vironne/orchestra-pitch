@@ -558,6 +558,42 @@
 
         .trust-item svg { width: 18px; height: 18px; color: var(--green); flex-shrink: 0; }
 
+        /* ===== LANG TOGGLE ===== */
+        .lang-toggle {
+            position: fixed;
+            top: 22px; right: 32px;
+            z-index: 150;
+            display: flex;
+            background: var(--glass-bg);
+            backdrop-filter: blur(12px);
+            border: 1px solid var(--glass-border);
+            border-radius: 8px;
+            overflow: hidden;
+        }
+
+        .lang-btn {
+            padding: 6px 14px;
+            font-family: 'JetBrains Mono', monospace;
+            font-size: 0.7rem;
+            font-weight: 500;
+            letter-spacing: 1px;
+            color: var(--text-muted);
+            background: transparent;
+            border: none;
+            cursor: pointer;
+            transition: all 0.25s ease;
+        }
+
+        .lang-btn.active {
+            color: white;
+            background: var(--gradient);
+        }
+
+        .lang-btn:not(.active):hover {
+            color: var(--text-primary);
+            background: rgba(255,255,255,0.05);
+        }
+
         /* ===== RESPONSIVE ===== */
         @media (max-width: 1024px) {
             .clients-grid { grid-template-columns: repeat(2, 1fr); }
@@ -569,6 +605,8 @@
             .hero { padding-top: 100px; padding-bottom: 60px; }
             .cta-section { padding: 80px 20px; }
             .logo { left: 20px; top: 18px; font-size: 1rem; }
+            .lang-toggle { top: 16px; right: 16px; }
+            .lang-btn { padding: 5px 10px; font-size: 0.65rem; }
 
             .section-title { font-size: clamp(1.4rem, 6vw, 2rem); }
             .section-desc { font-size: 0.95rem; }
@@ -618,20 +656,26 @@
     <!-- Logo -->
     <a href="#" class="logo">Orchestra Intelligence</a>
 
+    <!-- Lang toggle -->
+    <div class="lang-toggle">
+        <button class="lang-btn active" data-lang="fr">FR</button>
+        <button class="lang-btn" data-lang="en">EN</button>
+    </div>
+
     <!-- HERO -->
     <section class="hero">
         <div class="reveal">
-            <p class="section-label">Le constat</p>
+            <p class="section-label" data-i18n="hero_label">Le constat</p>
         </div>
-        <h1 class="section-title reveal reveal-delay-1">
+        <h1 class="section-title reveal reveal-delay-1" data-i18n="hero_title">
             Vos équipes sont compétentes.<br>
             <strong>Elles sont juste noyées.</strong>
         </h1>
-        <p class="section-desc reveal reveal-delay-2">
+        <p class="section-desc reveal reveal-delay-2" data-i18n="hero_desc">
             Journées pleines. Décisions en retard.
             Énergie gaspillée sur des tâches qui ne créent pas de valeur.
         </p>
-        <p class="hero-punchline reveal reveal-delay-3">
+        <p class="hero-punchline reveal reveal-delay-3" data-i18n="hero_punch">
             Ce n'est pas un problème de personnes. C'est un problème de système.
         </p>
 
@@ -645,8 +689,8 @@
 
     <!-- IRRITANTS -->
     <section>
-        <p class="section-label reveal">Les freins</p>
-        <h2 class="section-title reveal">
+        <p class="section-label reveal" data-i18n="irr_label">Les freins</p>
+        <h2 class="section-title reveal" data-i18n="irr_title">
             Ce qui vous ralentit <strong>au quotidien</strong>
         </h2>
 
@@ -655,33 +699,33 @@
                 <div class="irritant-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
                 </div>
-                <h4>Tâches répétitives</h4>
-                <p>Copier-coller entre outils, relances manuelles, reporting à la main.</p>
+                <h4 data-i18n="irr1_h">Tâches répétitives</h4>
+                <p data-i18n="irr1_p">Copier-coller entre outils, relances manuelles, reporting à la main.</p>
             </div>
             <div class="irritant-card reveal reveal-delay-2">
                 <div class="irritant-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 012-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
                 </div>
-                <h4>Outils empilés</h4>
-                <p>CRM, tableurs, emails, messagerie... rien ne se parle.</p>
+                <h4 data-i18n="irr2_h">Outils empilés</h4>
+                <p data-i18n="irr2_p">CRM, tableurs, emails, messagerie... rien ne se parle.</p>
             </div>
             <div class="irritant-card reveal reveal-delay-3">
                 <div class="irritant-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.066 2.573c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.573 1.066c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.066-2.573c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 12a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
                 </div>
-                <h4>Process bricolés</h4>
-                <p>Ça marche, mais ça tient avec du scotch.</p>
+                <h4 data-i18n="irr3_h">Process bricolés</h4>
+                <p data-i18n="irr3_p">Ça marche, mais ça tient avec du scotch.</p>
             </div>
             <div class="irritant-card reveal reveal-delay-4">
                 <div class="irritant-icon">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8.228 9c.549-1.165 2.03-2 3.772-2 2.21 0 4 1.343 4 3 0 1.4-1.278 2.575-3.006 2.907-.542.104-.994.54-.994 1.093m0 3h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                 </div>
-                <h4>Décisions au feeling</h4>
-                <p>Pas le temps de chercher la bonne donnée.</p>
+                <h4 data-i18n="irr4_h">Décisions au feeling</h4>
+                <p data-i18n="irr4_p">Pas le temps de chercher la bonne donnée.</p>
             </div>
         </div>
 
-        <div class="stat-callout reveal">
+        <div class="stat-callout reveal" data-i18n="irr_stat">
             Résultat : vos meilleurs profils passent 60% de leur temps à gérer, pas à créer.
         </div>
     </section>
@@ -690,16 +734,16 @@
 
     <!-- CE QU'ON FAIT -->
     <section class="agent-section">
-        <p class="section-label reveal">Ce qu'on fait</p>
-        <p class="agent-text reveal reveal-delay-1">
+        <p class="section-label reveal" data-i18n="agent_label">Ce qu'on fait</p>
+        <p class="agent-text reveal reveal-delay-1" data-i18n="agent_text">
             On construit des <strong>agents IA</strong> qui font le travail invisible<br>
             à la place de vos équipes.
         </p>
-        <p class="agent-clarif reveal reveal-delay-2">
+        <p class="agent-clarif reveal reveal-delay-2" data-i18n="agent_clarif">
             Un agent IA, c'est un assistant numérique qui exécute des tâches concrètes,
             automatiquement, dans vos outils existants.
         </p>
-        <p class="agent-punch reveal reveal-delay-3">
+        <p class="agent-punch reveal reveal-delay-3" data-i18n="agent_punch">
             Pas un chatbot. Pas un gadget. Un collègue silencieux qui bosse 24h/24.
         </p>
     </section>
@@ -708,77 +752,77 @@
 
     <!-- EXEMPLES -->
     <section>
-        <p class="section-label reveal">Exemples concrets</p>
-        <h2 class="section-title reveal">
+        <p class="section-label reveal" data-i18n="ex_label">Exemples concrets</p>
+        <h2 class="section-title reveal" data-i18n="ex_title">
             Ce qu'un agent peut <strong>faire pour vous</strong>
         </h2>
 
         <div class="examples-grid">
             <div class="example-card reveal reveal-delay-1">
-                <div class="example-problem">
+                <div class="example-problem" data-i18n="ex1_prob">
                     <div class="example-problem-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                     </div>
-                    Relances clients oubliées
+                    <span>Relances clients oubliées</span>
                 </div>
-                <div class="example-arrow">
+                <div class="example-arrow" data-i18n="ex1_arrow">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
-                    Détecte les devis sans réponse et relance au bon moment
+                    <span>Détecte les devis sans réponse et relance au bon moment</span>
                 </div>
-                <div class="example-result">
+                <div class="example-result" data-i18n="ex1_res">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                    Moins de CA perdu
+                    <span>Moins de CA perdu</span>
                 </div>
             </div>
 
             <div class="example-card reveal reveal-delay-2">
-                <div class="example-problem">
+                <div class="example-problem" data-i18n="ex2_prob">
                     <div class="example-problem-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                     </div>
-                    Reporting chronophage
+                    <span>Reporting chronophage</span>
                 </div>
-                <div class="example-arrow">
+                <div class="example-arrow" data-i18n="ex2_arrow">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
-                    Compile les données et génère le rapport chaque lundi
+                    <span>Compile les données et génère le rapport chaque lundi</span>
                 </div>
-                <div class="example-result">
+                <div class="example-result" data-i18n="ex2_res">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                    4h/semaine récupérées
+                    <span>4h/semaine récupérées</span>
                 </div>
             </div>
 
             <div class="example-card reveal reveal-delay-3">
-                <div class="example-problem">
+                <div class="example-problem" data-i18n="ex3_prob">
                     <div class="example-problem-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                     </div>
-                    Tri et qualification de leads
+                    <span>Tri et qualification de leads</span>
                 </div>
-                <div class="example-arrow">
+                <div class="example-arrow" data-i18n="ex3_arrow">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
-                    Analyse les demandes entrantes et les priorise
+                    <span>Analyse les demandes entrantes et les priorise</span>
                 </div>
-                <div class="example-result">
+                <div class="example-result" data-i18n="ex3_res">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                    Bons leads traités en premier
+                    <span>Bons leads traités en premier</span>
                 </div>
             </div>
 
             <div class="example-card reveal reveal-delay-4">
-                <div class="example-problem">
+                <div class="example-problem" data-i18n="ex4_prob">
                     <div class="example-problem-icon">
                         <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                     </div>
-                    Onboarding salarié
+                    <span>Onboarding salarié</span>
                 </div>
-                <div class="example-arrow">
+                <div class="example-arrow" data-i18n="ex4_arrow">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg>
-                    Envoie les docs, planifie les étapes, fait le suivi
+                    <span>Envoie les docs, planifie les étapes, fait le suivi</span>
                 </div>
-                <div class="example-result">
+                <div class="example-result" data-i18n="ex4_res">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
-                    RH libérée, autonomie rapide
+                    <span>RH libérée, autonomie rapide</span>
                 </div>
             </div>
         </div>
@@ -788,30 +832,30 @@
 
     <!-- MÉTHODE -->
     <section>
-        <div class="section-badge reveal">Notre méthode</div>
-        <h2 class="section-title reveal">
+        <div class="section-badge reveal" data-i18n="meth_badge">Notre méthode</div>
+        <h2 class="section-title reveal" data-i18n="meth_title">
             Comment on <strong>travaille</strong>
         </h2>
-        <p class="section-desc reveal">La méthode Orchestra — simple, rapide, intégrée.</p>
+        <p class="section-desc reveal" data-i18n="meth_desc">La méthode Orchestra — simple, rapide, intégrée.</p>
 
         <div class="steps-grid">
             <div class="step-card reveal reveal-delay-1">
                 <div class="step-num">1</div>
-                <h4>Diagnostic</h4>
-                <div class="step-tag">Gratuit, 30 min</div>
-                <p>On identifie ensemble les 2-3 tâches qui vous coûtent le plus de temps et d'énergie.</p>
+                <h4 data-i18n="step1_h">Diagnostic</h4>
+                <div class="step-tag" data-i18n="step1_tag">Gratuit, 30 min</div>
+                <p data-i18n="step1_p">On identifie ensemble les 2-3 tâches qui vous coûtent le plus de temps et d'énergie.</p>
             </div>
             <div class="step-card reveal reveal-delay-2">
                 <div class="step-num">2</div>
-                <h4>Construction</h4>
-                <div class="step-tag">2 à 6 semaines</div>
-                <p>On développe un agent IA intégré à vos outils. Pas de migration, pas de révolution.</p>
+                <h4 data-i18n="step2_h">Construction</h4>
+                <div class="step-tag" data-i18n="step2_tag">2 à 6 semaines</div>
+                <p data-i18n="step2_p">On développe un agent IA intégré à vos outils. Pas de migration, pas de révolution.</p>
             </div>
             <div class="step-card reveal reveal-delay-3">
                 <div class="step-num">3</div>
-                <h4>Pilotage</h4>
-                <div class="step-tag">En continu</div>
-                <p>On reste à vos côtés. On mesure les résultats, on ajuste, on fait évoluer.</p>
+                <h4 data-i18n="step3_h">Pilotage</h4>
+                <div class="step-tag" data-i18n="step3_tag">En continu</div>
+                <p data-i18n="step3_p">On reste à vos côtés. On mesure les résultats, on ajuste, on fait évoluer.</p>
             </div>
         </div>
     </section>
@@ -820,11 +864,11 @@
 
     <!-- CLIENTS -->
     <section>
-        <div class="section-badge reveal">Nos réalisations</div>
-        <h2 class="section-title reveal">
+        <div class="section-badge reveal" data-i18n="cli_badge">Nos réalisations</div>
+        <h2 class="section-title reveal" data-i18n="cli_title">
             Ils nous ont fait <strong>confiance</strong>
         </h2>
-        <p class="section-desc reveal">Des cas concrets, des résultats mesurables.</p>
+        <p class="section-desc reveal" data-i18n="cli_desc">Des cas concrets, des résultats mesurables.</p>
 
         <div class="clients-grid">
             <div class="client-card reveal reveal-delay-1">
@@ -833,9 +877,9 @@
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 21V5a2 2 0 00-2-2H7a2 2 0 00-2 2v16m14 0h2m-2 0h-5m-9 0H3m2 0h5M9 7h1m-1 4h1m4-4h1m-1 4h1m-5 10v-5a1 1 0 011-1h2a1 1 0 011 1v5m-4 0h4"/></svg>
                     Imagin' Communication — France
                 </div>
-                <h4>CRM intelligent</h4>
-                <p>Scoring prédictif des leads et recommandations commerciales.</p>
-                <div class="client-result">+ Pertinence, - Dispersion</div>
+                <h4 data-i18n="cli1_h">CRM intelligent</h4>
+                <p data-i18n="cli1_p">Scoring prédictif des leads et recommandations commerciales.</p>
+                <div class="client-result" data-i18n="cli1_res">+ Pertinence, - Dispersion</div>
             </div>
             <div class="client-card reveal reveal-delay-2">
                 <img src="wella sales.png" alt="Henkel Wella">
@@ -843,9 +887,9 @@
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                     Henkel, Wella, Carlance — Genève
                 </div>
-                <h4>Activation Instagram</h4>
-                <p>Identification de salons, messages contextualisés, centralisation CRM.</p>
-                <div class="client-result">Social = levier business</div>
+                <h4 data-i18n="cli2_h">Activation Instagram</h4>
+                <p data-i18n="cli2_p">Identification de salons, messages contextualisés, centralisation CRM.</p>
+                <div class="client-result" data-i18n="cli2_res">Social = levier business</div>
             </div>
             <div class="client-card reveal reveal-delay-3">
                 <img src="ares comptable.jpeg" alt="Ares Formation">
@@ -853,9 +897,9 @@
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 7h6m0 10v-3m-3 3h.01M9 17h.01M9 14h.01M12 14h.01M15 11h.01M12 11h.01M9 11h.01M7 21h10a2 2 0 002-2V5a2 2 0 00-2-2H7a2 2 0 00-2 2v14a2 2 0 002 2z"/></svg>
                     Ares Formation — France
                 </div>
-                <h4>Automatisation comptable</h4>
-                <p>Classification écritures, extraction factures, assistant conversationnel.</p>
-                <div class="client-result">Comptabilité maîtrisée</div>
+                <h4 data-i18n="cli3_h">Automatisation comptable</h4>
+                <p data-i18n="cli3_p">Classification écritures, extraction factures, assistant conversationnel.</p>
+                <div class="client-result" data-i18n="cli3_res">Comptabilité maîtrisée</div>
             </div>
             <div class="client-card reveal reveal-delay-4">
                 <img src="dubai.png" alt="Smart Renovation Dubai">
@@ -863,9 +907,9 @@
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
                     Smart Renovation — Dubai
                 </div>
-                <h4>SaaS métier complet</h4>
-                <p>Qualification leads, coordination terrain, chatbot WhatsApp intelligent.</p>
-                <div class="client-result">Marketing → Exécution fluide</div>
+                <h4 data-i18n="cli4_h">SaaS métier complet</h4>
+                <p data-i18n="cli4_p">Qualification leads, coordination terrain, chatbot WhatsApp intelligent.</p>
+                <div class="client-result" data-i18n="cli4_res">Marketing → Exécution fluide</div>
             </div>
         </div>
     </section>
@@ -874,33 +918,33 @@
 
     <!-- TEAM -->
     <section>
-        <div class="section-badge reveal">Notre équipe</div>
-        <h2 class="section-title reveal">
+        <div class="section-badge reveal" data-i18n="team_badge">Notre équipe</div>
+        <h2 class="section-title reveal" data-i18n="team_title">
             Une équipe <strong>senior et complémentaire</strong>
         </h2>
-        <p class="section-desc reveal">Vision, exécution et maîtrise technologique.</p>
+        <p class="section-desc reveal" data-i18n="team_desc">Vision, exécution et maîtrise technologique.</p>
 
         <div class="team-grid">
             <div class="team-card reveal reveal-delay-1">
                 <div class="team-avatar"><img src="ludo.jpg" alt="Ludovic Goutel"></div>
                 <h4>Ludovic Goutel</h4>
-                <div class="team-role">Fondateur</div>
+                <div class="team-role" data-i18n="team1_role">Fondateur</div>
                 <div class="team-exp">Ex-P&G & Entrepreneur</div>
-                <p>Structuration, opérations, delivery et transformation des organisations.</p>
+                <p data-i18n="team1_p">Structuration, opérations, delivery et transformation des organisations.</p>
             </div>
             <div class="team-card reveal reveal-delay-2">
                 <div class="team-avatar"><img src="xavier.jpg" alt="Xavier Vironneau"></div>
                 <h4>Xavier Vironneau</h4>
-                <div class="team-role">Associé</div>
-                <div class="team-exp">Conseil & FMCG</div>
-                <p>Vision stratégique, activation business et pilotage produit.</p>
+                <div class="team-role" data-i18n="team2_role">Associé</div>
+                <div class="team-exp" data-i18n="team2_exp">Conseil & FMCG</div>
+                <p data-i18n="team2_p">Vision stratégique, activation business et pilotage produit.</p>
             </div>
             <div class="team-card reveal reveal-delay-3">
                 <div class="team-avatar"><img src="An.jpg" alt="An Tian"></div>
                 <h4>An Tian</h4>
-                <div class="team-role">Associé</div>
+                <div class="team-role" data-i18n="team3_role">Associé</div>
                 <div class="team-exp">Ex-Amazon</div>
-                <p>AI Engineer, architectures robustes, agents intelligents et systèmes scalables.</p>
+                <p data-i18n="team3_p">AI Engineer, architectures robustes, agents intelligents et systèmes scalables.</p>
             </div>
         </div>
     </section>
@@ -909,28 +953,28 @@
 
     <!-- CTA -->
     <section class="cta-section">
-        <p class="section-label reveal">La seule vraie question</p>
-        <p class="cta-question reveal reveal-delay-1">
+        <p class="section-label reveal" data-i18n="cta_label">La seule vraie question</p>
+        <p class="cta-question reveal reveal-delay-1" data-i18n="cta_question">
             Où est-ce que votre organisation consomme<br>
             <strong>trop d'énergie pour trop peu de valeur ?</strong>
         </p>
         <div class="reveal reveal-delay-2">
-            <a href="mailto:xavier@orchestraintelligence.fr" class="cta-btn">Regardons ça ensemble</a>
-            <p class="cta-email">ou écrivez-nous : <a href="mailto:xavier@orchestraintelligence.fr">xavier@orchestraintelligence.fr</a></p>
+            <a href="mailto:xavier@orchestraintelligence.fr" class="cta-btn" data-i18n="cta_btn">Regardons ça ensemble</a>
+            <p class="cta-email" data-i18n="cta_email">ou écrivez-nous : <a href="mailto:xavier@orchestraintelligence.fr">xavier@orchestraintelligence.fr</a></p>
         </div>
 
         <div class="trust-row reveal reveal-delay-3">
-            <div class="trust-item">
+            <div class="trust-item" data-i18n="trust1">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
-                RGPD compliant
+                <span>RGPD compliant</span>
             </div>
-            <div class="trust-item">
+            <div class="trust-item" data-i18n="trust2">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
-                Hébergement Europe
+                <span>Hébergement Europe</span>
             </div>
-            <div class="trust-item">
+            <div class="trust-item" data-i18n="trust3">
                 <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
-                POC en 2 semaines
+                <span>POC en 2 semaines</span>
             </div>
         </div>
     </section>
@@ -969,6 +1013,124 @@
             const hint = document.querySelector('.scroll-hint');
             if (hint && window.scrollY > 80) hint.style.opacity = '0';
         }, { passive: true, once: true });
+
+        // ===== i18n =====
+        const translations = {
+            en: {
+                hero_label: 'The reality',
+                hero_title: 'Your teams are skilled.<br><strong>They\'re just drowning.</strong>',
+                hero_desc: 'Full days. Delayed decisions. Energy wasted on tasks that create no value.',
+                hero_punch: 'It\'s not a people problem. It\'s a system problem.',
+
+                irr_label: 'The blockers',
+                irr_title: 'What slows you down <strong>every day</strong>',
+                irr1_h: 'Repetitive tasks',
+                irr1_p: 'Copy-pasting between tools, manual follow-ups, hand-made reports.',
+                irr2_h: 'Stacked tools',
+                irr2_p: 'CRM, spreadsheets, emails, messaging... nothing talks to each other.',
+                irr3_h: 'Duct-taped processes',
+                irr3_p: 'It works, but it\'s held together with tape.',
+                irr4_h: 'Gut-feel decisions',
+                irr4_p: 'No time to find the right data.',
+                irr_stat: 'Result: your best people spend 60% of their time managing, not creating.',
+
+                agent_label: 'What we do',
+                agent_text: 'We build <strong>AI agents</strong> that handle the invisible work<br>so your teams don\'t have to.',
+                agent_clarif: 'An AI agent is a digital assistant that executes concrete tasks, automatically, within your existing tools.',
+                agent_punch: 'Not a chatbot. Not a gimmick. A silent colleague that works 24/7.',
+
+                ex_label: 'Real examples',
+                ex_title: 'What an agent can <strong>do for you</strong>',
+                ex1_prob: '<div class="example-problem-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div><span>Forgotten client follow-ups</span>',
+                ex1_arrow: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg><span>Detects unanswered quotes and follows up at the right time</span>',
+                ex1_res: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span>Less revenue lost</span>',
+                ex2_prob: '<div class="example-problem-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div><span>Time-consuming reporting</span>',
+                ex2_arrow: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg><span>Compiles data and generates the report every Monday</span>',
+                ex2_res: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span>4h/week recovered</span>',
+                ex3_prob: '<div class="example-problem-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div><span>Lead sorting & qualification</span>',
+                ex3_arrow: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg><span>Analyzes incoming requests and prioritizes them</span>',
+                ex3_res: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span>Best leads handled first</span>',
+                ex4_prob: '<div class="example-problem-icon"><svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4m0 4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg></div><span>Employee onboarding</span>',
+                ex4_arrow: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 7l5 5m0 0l-5 5m5-5H6"/></svg><span>Sends docs, schedules steps, tracks progress</span>',
+                ex4_res: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span>HR freed up, fast autonomy</span>',
+
+                meth_badge: 'Our method',
+                meth_title: 'How we <strong>work</strong>',
+                meth_desc: 'The Orchestra method — simple, fast, integrated.',
+                step1_h: 'Diagnosis',
+                step1_tag: 'Free, 30 min',
+                step1_p: 'We identify together the 2-3 tasks that cost you the most time and energy.',
+                step2_h: 'Build',
+                step2_tag: '2 to 6 weeks',
+                step2_p: 'We develop an AI agent integrated into your tools. No migration, no revolution.',
+                step3_h: 'Support',
+                step3_tag: 'Ongoing',
+                step3_p: 'We stay by your side. We measure results, adjust, and evolve.',
+
+                cli_badge: 'Our work',
+                cli_title: 'They <strong>trusted us</strong>',
+                cli_desc: 'Real cases, measurable results.',
+                cli1_h: 'Smart CRM',
+                cli1_p: 'Predictive lead scoring and sales recommendations.',
+                cli1_res: '+ Relevance, - Dispersion',
+                cli2_h: 'Instagram activation',
+                cli2_p: 'Salon identification, contextualized messages, CRM centralization.',
+                cli2_res: 'Social = business lever',
+                cli3_h: 'Accounting automation',
+                cli3_p: 'Entry classification, invoice extraction, conversational assistant.',
+                cli3_res: 'Accounting under control',
+                cli4_h: 'Full SaaS platform',
+                cli4_p: 'Lead qualification, field coordination, smart WhatsApp chatbot.',
+                cli4_res: 'Marketing → Seamless execution',
+
+                team_badge: 'Our team',
+                team_title: 'A <strong>senior & complementary</strong> team',
+                team_desc: 'Vision, execution and tech mastery.',
+                team1_role: 'Founder',
+                team1_p: 'Structuring, operations, delivery and organizational transformation.',
+                team2_role: 'Partner',
+                team2_exp: 'Consulting & FMCG',
+                team2_p: 'Strategic vision, business activation and product management.',
+                team3_role: 'Partner',
+                team3_p: 'AI Engineer, robust architectures, intelligent agents and scalable systems.',
+
+                cta_label: 'The only real question',
+                cta_question: 'Where does your organization spend<br><strong>too much energy for too little value?</strong>',
+                cta_btn: 'Let\'s look at it together',
+                cta_email: 'or write to us: <a href="mailto:xavier@orchestraintelligence.fr">xavier@orchestraintelligence.fr</a>',
+                trust1: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg><span>GDPR compliant</span>',
+                trust2: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3.055 11H5a2 2 0 012 2v1a2 2 0 002 2 2 2 0 012 2v2.945M8 3.935V5.5A2.5 2.5 0 0010.5 8h.5a2 2 0 012 2 2 2 0 104 0 2 2 0 012-2h1.064M15 20.488V18a2 2 0 012-2h3.064M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg><span>European hosting</span>',
+                trust3: '<svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg><span>POC in 2 weeks</span>',
+            }
+        };
+
+        // Store original FR content
+        const frContent = {};
+        document.querySelectorAll('[data-i18n]').forEach(el => {
+            frContent[el.dataset.i18n] = el.innerHTML;
+        });
+
+        let currentLang = 'fr';
+
+        function setLang(lang) {
+            currentLang = lang;
+            document.documentElement.lang = lang;
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+            document.querySelectorAll('[data-i18n]').forEach(el => {
+                const key = el.dataset.i18n;
+                if (lang === 'en' && translations.en[key]) {
+                    el.innerHTML = translations.en[key];
+                } else if (lang === 'fr' && frContent[key]) {
+                    el.innerHTML = frContent[key];
+                }
+            });
+        }
+
+        document.querySelectorAll('.lang-btn').forEach(btn => {
+            btn.addEventListener('click', () => setLang(btn.dataset.lang));
+        });
     </script>
 
 </body>
