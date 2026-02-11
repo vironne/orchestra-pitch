@@ -85,16 +85,12 @@
         .logo-icon {
             width: 32px; height: 32px;
             border-radius: 8px;
-            background: #000;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.3);
-            border: 1px solid rgba(255,255,255,0.1);
+            overflow: hidden;
         }
 
-        .logo-icon svg {
-            width: 20px; height: 20px;
+        .logo-icon img {
+            width: 100%; height: 100%;
+            object-fit: cover;
         }
 
         .logo-text {
@@ -682,16 +678,7 @@
     <!-- Logo -->
     <a href="#" class="logo">
         <div class="logo-icon">
-            <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M12 4L4 20h16L12 4z" stroke="rgba(255,255,255,0.3)" stroke-width="2" fill="none"/>
-                <rect x="18" y="6" width="3" height="12" rx="1.5" fill="url(#blueGlow)"/>
-                <defs>
-                    <linearGradient id="blueGlow" x1="0%" y1="0%" x2="0%" y2="100%">
-                        <stop offset="0%" stop-color="#60a5fa"/>
-                        <stop offset="100%" stop-color="#3b82f6"/>
-                    </linearGradient>
-                </defs>
-            </svg>
+            <img src="logo.jpeg" alt="Orchestra Intelligence">
         </div>
         <div class="logo-text">Orchestra <span>Intelligence</span></div>
     </a>
